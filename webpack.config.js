@@ -6,7 +6,7 @@ const version = require('./package.json').version
 var CDN_PATH = 'https://cdn.jsdelivr.net/gh/amehime/MiniValine@v' + version + '/dist/'
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const webpack = require('webpack')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJsPlugin = require('terser-webpack-plugin')
 var plugins = [
   new webpack.optimize.ModuleConcatenationPlugin()
 ]
@@ -71,9 +71,7 @@ if (process.env.env_config == 'build') {
   plugins.push(new CleanWebpackPlugin())
   plugins.push(new UglifyJsPlugin({
     parallel: 4,
-    sourceMap: false,
-    parallel: true,
-    uglifyOptions: {
+    terserOptions: {
       warnings: false,
       ie8: true,
       safari10: true,
